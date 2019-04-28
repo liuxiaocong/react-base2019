@@ -1,0 +1,8 @@
+.wrap {
+  height: 80vh;
+  background: #f6eeb4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

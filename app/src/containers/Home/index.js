@@ -7,8 +7,8 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className={ styles.title }>
-        Home Page
+      <div className={ styles.wrap }>
+        <div>Home Page</div>
       </div>
     );
   }

@@ -1,6 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './containers/Home';
+import Product from './containers/Product';
+import Me from './containers/Me';
+import styles from './styles.css';
+import lessStyles from './LApp.less';
+
+console.log(styles);
+console.log(lessStyles);
 
 function App() {
   return (
@@ -8,48 +15,16 @@ function App() {
       <div>
         <Header/>
         <Route exact path="/" component={ Home }/>
-        <Route path="/about" component={ About }/>
-        <Route path="/topics" component={ Topics }/>
+        <Route path="/product" component={ Product }/>
+        <Route path="/me" component={ Me }/>
       </div>
     </Router>
   );
 }
 
-function About() {
-  return <h2>About</h2>;
-}
-
-function Topic({ match }) {
-  return <h3>Requested Param: { match.params.id }</h3>;
-}
-
-function Topics({ match }) {
-  return (
-    <div>
-      <h2>Topics</h2>
-
-      <ul>
-        <li>
-          <Link to={ `${match.url}/components` }>Components</Link>
-        </li>
-        <li>
-          <Link to={ `${match.url}/props-v-state` }>Props v. State</Link>
-        </li>
-      </ul>
-
-      <Route path={ `${match.path}/:id` } component={ Topic }/>
-      <Route
-        exact
-        path={ match.path }
-        render={ () => <h3>Please select a topic.</h3> }
-      />
-    </div>
-  );
-}
-
 function Header() {
   return (
-    <ul>
+    <ul className={ `${styles.header} ${lessStyles.header}` }>
       <li>
         <Link to="/">Home</Link>
       </li>

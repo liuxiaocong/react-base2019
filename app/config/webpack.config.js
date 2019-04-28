@@ -409,6 +409,26 @@ module.exports = function(webpackEnv) {
               // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true,
             },
+            // add less support
+            {
+              test: /\.less$/,
+              use: [
+                {
+                  loader: "style-loader"
+                },
+                {
+                  loader: "css-loader",
+                  options: {
+                    sourceMap: true,
+                    modules: true,
+                    localIdentName: "[local]___[hash:base64:5]"
+                  }
+                },
+                {
+                  loader: "less-loader"
+                }
+              ]
+            },
             // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
             // using the extension .module.css
             {
