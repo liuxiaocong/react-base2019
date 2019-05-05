@@ -1,20 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { VisibilityFilters, toggleTodo, addTodo } from './actions';
+import { VisibilityFilters, toggleTodo, addTodo, sendRequest } from './actions';
 import styles from './styles.css';
-
-const getVisibleTodos = (todos, filter) => {
-  switch (filter) {
-    case VisibilityFilters.SHOW_ALL:
-      return todos;
-    case VisibilityFilters.SHOW_COMPLETED:
-      return todos.filter(t => t.completed);
-    case VisibilityFilters.SHOW_ACTIVE:
-      return todos.filter(t => !t.completed);
-    default:
-      throw new Error('Unknown filter: ' + filter);
-  }
-};
 
 class Todo extends Component {
 
@@ -26,10 +13,18 @@ class Todo extends Component {
   }
 
   render() {
+    console.log(this.props.captcha.loading);
     return (
       <div className={ styles.wrap }>
+        {
+          this.props.captcha.loading ? <p>Loading ...</p>
+            : this.props.captcha.data &&
+            <img className={ styles.capImage } src={ `data:image/gif;base64,${this.props.captcha.data}` }></img>
+
+        }
+
         <input ref={ node => this.todoNode = node }/>
-        <button className={styles.addButton} onClick={ () => {
+        <button className={ styles.addButton } onClick={ () => {
           if (!this.todoNode.value.trim()) {
             return;
           }
@@ -37,9 +32,16 @@ class Todo extends Component {
         } }>
           Add Todo
         </button>
+
+        <button className={ styles.addButton } onClick={ () => {
+          this.props.sendRequest();
+        } }>
+          sendRequest
+        </button>
+
         <div>{
           this.props.todos.map((todo, index) => (
-            <p key={index + 'k'}>{ todo.text }</p>
+            <p key={ index + 'k' }>{ todo.text }</p>
           ))
         }</div>
       </div>
@@ -48,12 +50,14 @@ class Todo extends Component {
 }
 
 const mapStateToProps = state => ({
-  todos: getVisibleTodos(state.todos, state.visibilityFilter),
+  todos: state.todos,
+  captcha: state.captcha,
 });
 
 const mapDispatchToProps = dispatch => ({
   toggleTodo: id => dispatch(toggleTodo(id)),
   addTodo: value => dispatch(addTodo(value)),
+  sendRequest: () => dispatch(sendRequest()),
 });
 
 export default connect(

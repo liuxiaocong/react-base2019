@@ -24,3 +24,12 @@
   font-size: 20px;
 }
 
+:global input,
+:global button {
+  outline: none;
+}
+
+:global input:focus,
+:global button:focus {
+  outline: none;
+}

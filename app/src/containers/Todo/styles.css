@@ -17,4 +17,15 @@
   border: none;
   border-radius: 10px;
   margin: 20px;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  opacity: 0.8;
+}
+
+.capImage {
+  width: 300px;
+  height: 100px;
+  margin: 20px;
 }

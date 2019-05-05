@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import todos from '../containers/Todo/todos'
-import visibilityFilter from '../containers/Todo/visibilityFilter'
+import captcha from '../containers/Todo/captcha'
 
 export default combineReducers({
   todos,
-  visibilityFilter
+  captcha
 })

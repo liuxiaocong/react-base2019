@@ -1,16 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { applyMiddleware } from 'redux';
 import Home from './containers/Home';
 import Product from './containers/Product';
 import Me from './containers/Me';
 import Todo from './containers/Todo';
 import { createStore } from 'redux';
+import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import styles from './styles.css';
 import lessStyles from './LApp.less';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 function App() {
   return (
