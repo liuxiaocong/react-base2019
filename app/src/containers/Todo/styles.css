@@ -1,0 +1,20 @@
+.wrap {
+  height: 80vh;
+  background: #f6eeb4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.addButton {
+  display: inline-block;
+  line-height: 30px;
+  width: 100px;
+  background: #f6beb4;
+  color: #FFF;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  margin: 20px;
+}
