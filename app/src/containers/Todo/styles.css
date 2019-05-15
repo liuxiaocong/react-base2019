@@ -29,3 +29,9 @@
   height: 100px;
   margin: 20px;
 }
+
+.dataWrap {
+  max-width: 600px;
+  word-break: break-all;
+  font-size: 11px;
+}
