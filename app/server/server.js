@@ -1,4 +1,6 @@
-import App from '../src/App';
+import AppSSR from '../src/AppSSR';
+import React from 'react'
+import { renderToString } from 'react-dom/server'
 const Koa = require("koa");
 const app = new Koa();
 const cheerio = require("cheerio");
@@ -29,13 +31,24 @@ async function loadHTMLTemplate(path) {
 const router = require('koa-better-router')().loadMethods();
 
 app.use(router.middleware());
+app.use(function (ctx, next) {
+  //如果路由中间件已经有数据了，无需再走静态文件中间件了
+  if (ctx.body) {
+    return true;
+  }
+
+  return next();
+});
+
 app.use(serve({rootDir: RES_PATH}));
 
 router.get('/', async(ctx, next) => {
-  let $ = await loadHTMLTemplate(path.resolve(__dirname, '../build/index.html'));
+  let $ = await loadHTMLTemplate(path.resolve(__dirname, '../build/app.html'));
   if (!$) {
     return ctx.body = null;
   }
+  let str = renderToString(<AppSSR />);
+  $('#root').html(str);
   return ctx.body = $.html();
 });
 
