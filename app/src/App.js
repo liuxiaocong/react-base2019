@@ -16,6 +16,7 @@ import rootSaga from './sagas';
 import rootReducer from './reducers';
 import styles from './styles.css';
 import lessStyles from './LApp.less';
+import sassStyles from './sassStyle.sass';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware, thunk];
@@ -44,7 +45,7 @@ function App() {
 function Header() {
   return (
     <ul className={ `${styles.header} ${lessStyles.header}` }>
-      <li>
+      <li className={sassStyles.test}>
         <Link to="/">Home</Link>
       </li>
       <li>
